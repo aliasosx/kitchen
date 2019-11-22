@@ -5,9 +5,10 @@
         <div class="card-header"
           [ngClass]="[o.deriveryDescription !== 'inplace' ? 'bg-danger text-light':'bg-dark text-light']">
           <div class="row align-middle">
-            <div class="col col-md-4 text-left"><span class="h6">Order # {{ o.ticket }}</span></div>
-            <div class="col col-md-4 text-center"><span class="h6">{{ o.deriveryDescription }}</span></div>
-            <div class="col col-md-4 text-right">{{ o.orderDateTime.toDate() |date: 'HH:mm:ss' }}</div>
+            <div class="col col-md-4 text-left"><span class="h5">Order # {{ o.ticket }}</span></div>
+            <div class="col col-md-4 text-center"><span class="h5">{{ o.deriveryDescription }}</span></div>
+            <div class="col col-md-4 text-right"><span
+                class="h5">{{ o.orderDateTime.toDate() |date: 'HH:mm:ss' }}</span></div>
           </div>
 
         </div>
@@ -16,13 +17,16 @@
             <div class="col col-md-1 text-left align-middle h6">{{ f.quantity | number }}</div>
             <div class="col col-md-7 text-left align-middle">{{ f.food  }}</div>
             <div class="col col-md-3 text-left align-middle"><span class="text-danger">{{ f.note  }}</span></div>
-            <div class="col col-md-1 text-center align-middle"><img src="../../assets/icons/marks.png"
-                style="max-width: 20px;">
+            <div class="col col-md-1 text-center align-middle" *ngIf="o.done === false; else undone">
+              <img src="../../assets/icons/marks.png" style="max-width: 20px;">
             </div>
+            <ng-template #undone>
+              <div class="col col-md-1 text-center align-middle">
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
-
     </div>
   </ng-container>
   <ng-template #loading>
