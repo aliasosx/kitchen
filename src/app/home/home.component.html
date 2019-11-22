@@ -1,0 +1,33 @@
+<div class="row">
+  <ng-container>
+    <div class="col col-sm-12 col-md-4 mb-1" *ngFor="let o of orders | async">
+      <div class="card">
+        <div class="card-header"
+          [ngClass]="[o.deriveryDescription !== 'inplace' ? 'bg-danger text-light':'bg-dark text-light']">
+          <div class="row align-middle">
+            <div class="col col-md-4 text-left"><span class="h6">Order # {{ o.ticket }}</span></div>
+            <div class="col col-md-4 text-center"><span class="h6">{{ o.deriveryDescription }}</span></div>
+            <div class="col col-md-4 text-right">{{ o.orderDateTime.toDate() |date: 'HH:mm:ss' }}</div>
+          </div>
+
+        </div>
+        <div class="card-body">
+          <div class="row align-middle" *ngFor="let f of o.food">
+            <div class="col col-md-1 text-left align-middle h6">{{ f.quantity | number }}</div>
+            <div class="col col-md-7 text-left align-middle">{{ f.food  }}</div>
+            <div class="col col-md-3 text-left align-middle"><span class="text-danger">{{ f.note  }}</span></div>
+            <div class="col col-md-1 text-center align-middle"><img src="../../assets/icons/marks.png"
+                style="max-width: 20px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <div class="text-center display-1">
+      Waiting ...
+    </div>
+  </ng-template>
+</div>

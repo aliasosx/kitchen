@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyBiYjJTtFxtMsgCIQXJuUbDRB2WATLsN3o',
+    authDomain: 'orchid-pos.firebaseapp.com',
+    databaseURL: 'https://orchid-pos.firebaseio.com',
+    projectId: 'orchid-pos',
+    storageBucket: 'orchid-pos.appspot.com',
+    messagingSenderId: '322682959300'
+  },
 };
 
 /*
