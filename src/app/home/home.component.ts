@@ -1,8 +1,8 @@
 import { Order } from './../interfaces/order';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map, filter, groupBy, mergeMap, toArray } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   orderRef: AngularFirestoreCollection<Order>;
   orders: Observable<any[]>;
   waitingBackend = true;
+  subScription: Subscription;
+  time: Date;
 
   async ngOnInit() {
     console.log('Processing ..');
