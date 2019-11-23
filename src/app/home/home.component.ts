@@ -21,19 +21,23 @@ export class HomeComponent implements OnInit {
   waitingBackend = true;
   subScription: Subscription;
   time: Date;
-
+  orderStatus = false;
+  orderCount = 0;
   async ngOnInit() {
-    console.log('Processing ..');
-    this.orders = await this.orderRef.snapshotChanges().pipe(map(change => {
+    this.orders = this.orderRef.snapshotChanges().pipe(map(change => {
       return change.map(a => {
         const orders = a.payload.doc.data() as Order;
         orders['id'] = a.payload.doc.id;
         orders['food'] = a.payload.doc.data().food.filter(b => b.kitchen.toUpperCase() === 'FOOD');
-        this.waitingBackend = false;
+        if (orders['food'].length > 0) {
+          this.orderStatus = true;
+        } else {
+          this.orderStatus = false;
+        }
+        console.log(orders['food'].length);
         return orders;
       });
     }));
-    console.log(this.orders);
   }
 
 }

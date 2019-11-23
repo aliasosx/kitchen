@@ -1,6 +1,6 @@
 <div class="row" style="margin-top: 25px;">
   <ng-container *ngFor="let o of orders | async">
-    <div class="col col-md-4 col-xm-12 col-sm-12">
+    <div class="col col-md-4 col-xm-12 col-sm-12" *ngIf="o.food.length > 0">
       <div class="col-md-12">
         <div class="card mb-1">
           <div class="card-header"
@@ -39,19 +39,19 @@
                   </tr>
                 </tbody>
               </table>
-
-
             </div>
-
-
           </div>
         </div>
       </div>
     </div>
   </ng-container>
-
-
-
-
-
 </div>
+<ng-container *ngIf="!orderStatus">
+  <div class="row text-center mt-4">
+    <div class="col">
+      <div class="display-4 text-secondary">
+        ຍັງບໍ່ມີລາຍການສັ່ງອາຫານ
+      </div>
+    </div>
+  </div>
+</ng-container>
