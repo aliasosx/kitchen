@@ -1,8 +1,8 @@
 <div class="row" style="margin-top: 25px;">
   <ng-container *ngFor="let o of orders | async">
-    <div class="col col-md-4 col-xm-12 col-sm-12" *ngIf="o.food">
-      <div class="col col-md-12">
-        <div class="card mb-1" style="width: 100%;">
+    <div class="col col-md-4 col-xm-12 col-sm-12">
+      <div class="col-md-12">
+        <div class="card mb-1">
           <div class="card-header"
             [ngClass]="[o.deriveryDescription !== 'inplace' ? 'bg-danger text-light':'bg-dark text-light']">
             <div class="row align-middle text-nowrap">
@@ -15,22 +15,35 @@
 
           </div>
           <div class="card-body">
-            <div class="row align-middle" *ngFor="let f of o.food">
-              <div class="col col-md-1 col-sm-1 text-left align-middle h6 font-weight-bold">{{ f.quantity | number }}
-              </div>
-              <div class="col col-md-8 col-sm-7 text-left align-middle text-nowrap">{{ f.food  }}</div>
-              <div class="col col-md-2 col-sm-1 text-left align-middle" style="min-width: 50px;"><span
-                  class="text-danger font-weight-bold">{{ f.note  }}</span>
-              </div>
-              <div class="col col-md-1 col-sm-1  text-center align-middle" *ngIf="f.done; else undone">
-                <img src="../../assets/icons/marks.png" style="max-width: 20px;">
-              </div>
+            <div class="table-responsive-sm" style="margin: 0;">
+              <table class="table table-hover" style="width: 100%;">
+                <thead class="thead-light">
+                  <th class="text-center">ຈຳນວນ</th>
+                  <th class="text-left">ອາຫານ</th>
+                  <th class="text-left">ເພີ່ມເຕີມ</th>
+                  <th class="text-center"></th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let f of o.food" [ngClass]="{'table-success':f.done === true}">
+                    <td class="text-center" [ngStyle]="{'border-left': !f.note? '':'3px solid #F5365C'}">
+                      {{ f.quantity | number }}</td>
+                    <td class="text-left text-nowrap">{{ f.food  }}</td>
+                    <td class="text-left text-danger font-weight-bold">{{ f.note  }}</td>
+                    <td class="text-center" *ngIf="f.done; else undone">
+                      <img src="../../assets/icons/marks.png" style="max-width: 20px;">
+                    </td>
+                    <ng-template #undone>
+                      <td>
+                      </td>
+                    </ng-template>
+                  </tr>
+                </tbody>
+              </table>
 
-              <ng-template #undone>
-                <div class="col col-md-1 col-sm-1 text-center align-middle">
-                </div>
-              </ng-template>
+
             </div>
+
+
           </div>
         </div>
       </div>
